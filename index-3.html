@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelvin Hartanto - Backend Engineer & Mobile Enthusiast</title>
+    
+    <!-- Meta SEO -->
+    <meta name="author" content="Kelvin Hartanto">
+    <meta name="description" content="Portfolio Kelvin Hartanto, seorang Backend Engineer & Mobile Enthusiast dengan fokus pada performa, skalabilitas, dan automasi. Jelajahi proyek-proyek di Go, Laravel, Flutter, dan lainnya.">
+    <meta name="keywords" content="Kelvin Hartanto, Backend Engineer, Mobile Developer, Go, Gin, PHP, Laravel, Flutter, GCP, Docker, Portfolio">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Kelvin Hartanto - Backend Engineer & Mobile Enthusiast">
+    <meta property="og:description" content="Portfolio Kelvin Hartanto, seorang Backend Engineer & Mobile Enthusiast dengan fokus pada performa, skalabilitas, dan automasi.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com">
+    <meta property="og:image" content="https://placehold.co/1200x630/0F172A/F1F5F9?text=Kelvin+Hartanto">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://placehold.co/32x32/60A5FA/FFFFFF?text=K">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Alpine.js for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Custom Tailwind Config & Styles -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        'electric-blue': '#60A5FA', // blue-400
+                        'vivid-violet': '#8B5CF6', // violet-500
+                        'neon-green': '#38E078',
+                        'slate-base': '#0F172A', // slate-900
+                        'slate-surface': '#1E293B', // slate-800
+                        'slate-text': '#F1F5F9', // slate-100
+                    },
+                    animation: {
+                        'gradient-shine': 'gradient-shine 3s linear infinite',
+                        'marquee': 'marquee 30s linear infinite',
+                    },
+                    keyframes: {
+                        'gradient-shine': {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        'marquee': {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for background patterns and complex gradients */
+        body {
+            background-color: #0F172A; /* slate-900 */
+            color: #F1F5F9; /* slate-100 */
+        }
+        .dark body {
+            background-color: #0F172A;
+            color: #F1F5F9;
+        }
+        .light body {
+            background-color: #F1F5F9;
+            color: #0F172A;
+        }
+
+        .tech-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .tech-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 1)),
+                radial-gradient(ellipse at top left, rgba(96, 165, 250, 0.15), transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.15), transparent 50%);
+            background-size: cover, 100% 100%, 100% 100%;
+            z-index: -1;
+        }
+        .tech-grid-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(to right, #1E293B 1px, transparent 1px), linear-gradient(to bottom, #1E293B 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.2;
+            z-index: -2;
+        }
+        
+        .light .tech-bg::before {
+            background-image: 
+                linear-gradient(rgba(241, 245, 249, 0.95), rgba(241, 245, 249, 1)),
+                radial-gradient(ellipse at top left, rgba(96, 165, 250, 0.1), transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.1), transparent 50%);
+        }
+        .light .tech-grid-bg::after {
+            background-image: linear-gradient(to right, #CBD5E1 1px, transparent 1px), linear-gradient(to bottom, #CBD5E1 1px, transparent 1px);
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Magnetic button effect */
+        .magnetic-button {
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        /* Reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-delay: -1ms !important;
+                animation-duration: 1ms !important;
+                animation-iteration-count: 1 !important;
+                background-attachment: scroll !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0s !important;
+                transition-delay: 0s !important;
+            }
+        }
+    </style>
+</head>
+<body class="tech-bg tech-grid-bg font-sans antialiased" 
+      x-data="{ 
+          isMenuOpen: false, 
+          isModalOpen: false, 
+          modalData: {}, 
+          activeTab: 'backend', 
+          activeFilter: 'all',
+          isDarkMode: true,
+          projects: [
+              { id: 1, category: 'backend', title: 'Async Campaign Worker', role: 'Lead Backend Engineer', thumb: 'https://placehold.co/600x400/1E293B/F1F5F9?text=Go+Worker', impact: 'Meningkatkan throughput campaign sebesar 300% dan mengurangi duplikasi pesan hingga 99%.', desc: 'Sistem worker asinkron untuk memproses pengiriman campaign (email, notifikasi) dalam volume besar. Dibangun dengan Go untuk performa tinggi dan konkurensi, serta diintegrasikan dengan GCP Pub/Sub untuk antrian pesan yang andal.', tech: ['Go', 'Redis', 'GCP Pub/Sub', 'Docker'], repo: '#', live: '#' },
+              { id: 2, category: 'web', title: 'Admin CMS (Laravel)', role: 'Fullstack Developer', thumb: 'https://placehold.co/600x400/1E293B/F1F5F9?text=Laravel+CMS', impact: 'Mempercepat manajemen konten dan pengguna dengan sistem RBAC yang fleksibel.', desc: 'Content Management System internal dengan fitur Role-Based Access Control (RBAC), manajemen file terintegrasi, dan sistem caching menggunakan Redis untuk mempercepat waktu muat data.', tech: ['PHP', 'Laravel', 'MySQL', 'Redis', 'Bootstrap'], repo: '#', live: '#' },
+              { id: 3, category: 'mobile', title: 'Flutter Client App', role: 'Mobile Developer', thumb: 'https://placehold.co/600x400/1E293B/F1F5F9?text=Flutter+App', impact: 'Memungkinkan pengguna mengakses data penting secara offline, meningkatkan retensi sebesar 20%.', desc: 'Aplikasi mobile untuk klien yang dibangun dengan arsitektur offline-first. Data disinkronkan secara otomatis dengan Firebase Firestore saat koneksi tersedia, memberikan pengalaman pengguna yang mulus.', tech: ['Flutter', 'Dart', 'Firebase', 'SQLite'], repo: '#', live: '#' },
+              { id: 4, category: 'backend', title: 'Search Analytics API', role: 'Backend Engineer', thumb: 'https://placehold.co/600x400/1E293B/F1F5F9?text=Search+API', impact: 'Menurunkan latensi pencarian rata-rata dari 500ms menjadi <50ms.', desc: 'API pencarian berkinerja tinggi untuk analitik data. Menggunakan Elasticsearch untuk kueri kompleks dan SingleStore sebagai database hybrid (transaksional/analitik) untuk kecepatan data ingestion.', tech: ['Elasticsearch', 'SingleStore', 'Go', 'Gin'], repo: '#', live: '#' },
+              { id: 5, category: 'backend', title: 'n8n Automation Pipeline', role: 'Automation Specialist', thumb: 'https://placehold.co/600x400/1E293B/F1F5F9?text=n8n+Flow', impact: 'Menghemat ~10 jam kerja manual per minggu melalui automasi notifikasi.', desc: 'Membangun pipeline automasi menggunakan n8n untuk melakukan scraping data, mem-parsing informasi penting, dan mengirimkan notifikasi ke grup WhatsApp serta mencatatnya di Google Sheets.', tech: ['n8n', 'Webhooks', 'APIs', 'Google Sheets'], repo: '#', live: '#' },
+              { id: 6, category: 'web', title: 'Containerized Deployment', role: 'DevOps Engineer', thumb: 'https://placehold.co/600x400/1E293B/F1F5F9?text=Docker+CI', impact: 'Menstandarisasi lingkungan development dan production, mengurangi error deployment sebesar 90%.', desc: 'Mengimplementasikan proses containerization menggunakan Docker untuk berbagai layanan. Membuat pipeline CI/CD sederhana untuk automasi build dan deployment.', tech: ['Docker', 'CI/CD', 'GCP Cloud Build', 'Bash'], repo: '#', live: '#' }
+          ],
+          openModal(project) { this.modalData = project; this.isModalOpen = true; },
+          toggleTheme() { 
+              this.isDarkMode = !this.isDarkMode;
+              if (this.isDarkMode) {
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.classList.remove('light');
+              } else {
+                  document.documentElement.classList.add('light');
+                  document.documentElement.classList.remove('dark');
+              }
+          }
+      }"
+      @keydown.escape.window="isModalOpen = false; isMenuOpen = false"
+      x-init="
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            isDarkMode = true;
+            document.documentElement.classList.add('dark');
+        } else {
+            isDarkMode = false;
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            isDarkMode = e.matches;
+            if (e.matches) {
+                document.documentElement.classList.add('dark');
+                document.documentElement.classList.remove('light');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+            }
+        });
+      ">
+
+    <!-- Header & Navbar -->
+    <header x-data="{ atTop: true }" @scroll.window="atTop = (window.pageYOffset < 50)" class="sticky top-0 z-40 w-full transition-all duration-300" 
+            :class="{ 'bg-slate-base/80 dark:bg-slate-base/80 backdrop-blur-lg border-b border-slate-surface/50': !atTop, 'bg-transparent': atTop }">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#" class="text-2xl font-display font-bold tracking-tight text-slate-text dark:text-slate-text">
+                    Kelvin H.
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-sm font-medium text-slate-300 dark:text-slate-300 hover:text-electric-blue transition-colors">Home</a>
+                    <a href="#about" class="text-sm font-medium text-slate-300 dark:text-slate-300 hover:text-electric-blue transition-colors">About</a>
+                    <a href="#skills" class="text-sm font-medium text-slate-300 dark:text-slate-300 hover:text-electric-blue transition-colors">Skills</a>
+                    <a href="#projects" class="text-sm font-medium text-slate-300 dark:text-slate-300 hover:text-electric-blue transition-colors">Projects</a>
+                    <a href="#testimonials" class="text-sm font-medium text-slate-300 dark:text-slate-300 hover:text-electric-blue transition-colors">Testimonials</a>
+                    <a href="#contact" class="text-sm font-medium text-slate-300 dark:text-slate-300 hover:text-electric-blue transition-colors">Contact</a>
+                </nav>
+
+                <!-- Right side -->
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Toggle -->
+                    <button @click="toggleTheme()" class="p-2 rounded-full text-slate-400 hover:text-slate-100 hover:bg-slate-surface transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-base focus:ring-neon-green">
+                        <svg x-show="isDarkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <svg x-show="!isDarkMode" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    </button>
+                    
+                    <!-- CV Button -->
+                    <a href="#" class="hidden sm:inline-block px-4 py-2 text-sm font-semibold text-slate-text bg-vivid-violet rounded-lg shadow-md hover:bg-opacity-90 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-base focus:ring-neon-green">
+                        Download CV
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button @click="isMenuOpen = !isMenuOpen" class="md:hidden p-2 rounded-md text-slate-400 hover:text-slate-100 hover:bg-slate-surface transition-colors focus:outline-none focus:ring-2 focus:ring-inset focus:ring-neon-green">
+                        <svg x-show="!isMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <svg x-show="isMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div x-show="isMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="md:hidden absolute top-16 inset-x-0 p-2 transition transform origin-top-right" @click.away="isMenuOpen = false">
+            <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-slate-base dark:bg-slate-base divide-y-2 divide-slate-surface">
+                <div class="pt-5 pb-6 px-5">
+                    <div class="grid grid-cols-1 gap-y-8">
+                        <a href="#home" @click="isMenuOpen = false" class="text-base font-medium text-slate-text hover:text-electric-blue">Home</a>
+                        <a href="#about" @click="isMenuOpen = false" class="text-base font-medium text-slate-text hover:text-electric-blue">About</a>
+                        <a href="#skills" @click="isMenuOpen = false" class="text-base font-medium text-slate-text hover:text-electric-blue">Skills</a>
+                        <a href="#projects" @click="isMenuOpen = false" class="text-base font-medium text-slate-text hover:text-electric-blue">Projects</a>
+                        <a href="#testimonials" @click="isMenuOpen = false" class="text-base font-medium text-slate-text hover:text-electric-blue">Testimonials</a>
+                        <a href="#contact" @click="isMenuOpen = false" class="text-base font-medium text-slate-text hover:text-electric-blue">Contact</a>
+                    </div>
+                    <div class="mt-6">
+                        <a href="#" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-vivid-violet hover:bg-opacity-90">
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+             <div class="absolute inset-0 z-0">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-3xl max-h-3xl bg-vivid-violet/20 rounded-full blur-3xl animate-pulse"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/4 -translate-y-1/4 w-[50vw] h-[50vw] max-w-2xl max-h-2xl bg-electric-blue/20 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
+            </div>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+                <div x-data="{}" x-intersect.once="document.querySelector('#hero-content').classList.add('visible')" class="reveal" id="hero-content">
+                    <img src="https://i.pravatar.cc/150?u=kelvin" alt="Avatar Kelvin Hartanto" class="w-32 h-32 rounded-full mx-auto mb-6 ring-4 ring-slate-surface shadow-lg">
+                    <h1 class="text-4xl md:text-6xl font-display font-extrabold tracking-tighter text-slate-text dark:text-slate-text mb-4">
+                        Kelvin Hartanto
+                    </h1>
+                    <p class="text-xl md:text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-electric-blue to-vivid-violet mb-8">
+                        Backend Engineer & Mobile Enthusiast
+                    </p>
+                    <p class="max-w-2xl mx-auto text-lg text-slate-300 dark:text-slate-300 leading-relaxed mb-10">
+                        Membangun sistem backend yang andal, terukur, dan berperforma tinggi. Terobsesi dengan automasi proses dan menciptakan solusi teknologi yang efisien.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#contact" class="w-full sm:w-auto px-8 py-3 text-lg font-bold text-slate-base bg-neon-green rounded-lg shadow-lg shadow-neon-green/20 hover:scale-[1.03] hover:shadow-neon-green/40 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-neon-green/50">
+                            Hire Me
+                        </a>
+                        <a href="#projects" class="w-full sm:w-auto px-8 py-3 text-lg font-bold text-slate-text rounded-lg ring-2 ring-vivid-violet hover:bg-vivid-violet hover:text-white transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-vivid-violet/50">
+                            View Projects
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 sm:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div x-data x-intersect.once.margin.-100px="document.querySelectorAll('.about-reveal').forEach((el, i) => setTimeout(() => el.classList.add('visible'), i * 150))" class="text-center">
+                    <h2 class="about-reveal reveal text-3xl md:text-4xl font-display font-bold text-slate-text dark:text-slate-text mb-4">Tentang Saya</h2>
+                    <p class="about-reveal reveal max-w-3xl mx-auto text-lg text-slate-300 dark:text-slate-300 leading-relaxed mb-12">
+                        Saya adalah seorang software engineer dengan pengalaman dalam merancang dan mengembangkan aplikasi backend dan mobile. Fokus utama saya adalah menciptakan kode yang bersih, arsitektur yang solid, dan sistem yang dapat diandalkan untuk menyelesaikan masalah bisnis yang kompleks. Saya percaya pada kekuatan automasi untuk meningkatkan produktivitas dan mengurangi kesalahan manusia.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Highlight Card 1 -->
+                    <div x-data x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal bg-slate-base/50 dark:bg-slate-base/50 backdrop-blur-sm border border-slate-surface rounded-2xl p-8 text-center transition-all duration-300 hover:scale-[1.02] hover:border-electric-blue/50">
+                        <div class="text-5xl font-bold text-electric-blue mb-2">5+</div>
+                        <h3 class="text-lg font-semibold text-slate-text dark:text-slate-text">Tahun Pengalaman</h3>
+                    </div>
+                    <!-- Highlight Card 2 -->
+                    <div x-data x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal bg-slate-base/50 dark:bg-slate-base/50 backdrop-blur-sm border border-slate-surface rounded-2xl p-8 text-center transition-all duration-300 hover:scale-[1.02] hover:border-vivid-violet/50" style="transition-delay: 150ms;">
+                        <div class="text-5xl font-bold text-vivid-violet mb-2">15+</div>
+                        <h3 class="text-lg font-semibold text-slate-text dark:text-slate-text">Proyek Dikirimkan</h3>
+                    </div>
+                    <!-- Highlight Card 3 -->
+                    <div x-data x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal bg-slate-base/50 dark:bg-slate-base/50 backdrop-blur-sm border border-slate-surface rounded-2xl p-8 text-center transition-all duration-300 hover:scale-[1.02] hover:border-neon-green/50" style="transition-delay: 300ms;">
+                        <div class="text-5xl font-bold text-neon-green mb-2">4</div>
+                        <h3 class="text-lg font-semibold text-slate-text dark:text-slate-text">Industri Berbeda</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 sm:py-32 bg-slate-base/30 dark:bg-slate-base/30">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <div x-data x-intersect.once.margin.-100px="document.querySelector('#skills-header').classList.add('visible')" id="skills-header" class="reveal text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-slate-text dark:text-slate-text mb-4">Keahlian & Teknologi</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-slate-300 dark:text-slate-300">Tumpukan teknologi yang saya gunakan untuk membangun solusi modern.</p>
+                </div>
+
+                <div x-data x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal max-w-4xl mx-auto">
+                    <!-- Tabs -->
+                    <div class="mb-8 flex justify-center border-b border-slate-surface">
+                        <button @click="activeTab = 'backend'" :class="{'border-electric-blue text-electric-blue': activeTab === 'backend', 'border-transparent text-slate-400 hover:text-slate-200': activeTab !== 'backend'}" class="px-6 py-3 font-medium border-b-2 transition-colors focus:outline-none">Backend</button>
+                        <button @click="activeTab = 'mobile'" :class="{'border-electric-blue text-electric-blue': activeTab === 'mobile', 'border-transparent text-slate-400 hover:text-slate-200': activeTab !== 'mobile'}" class="px-6 py-3 font-medium border-b-2 transition-colors focus:outline-none">Mobile</button>
+                        <button @click="activeTab = 'data'" :class="{'border-electric-blue text-electric-blue': activeTab === 'data', 'border-transparent text-slate-400 hover:text-slate-200': activeTab !== 'data'}" class="px-6 py-3 font-medium border-b-2 transition-colors focus:outline-none">Data</button>
+                        <button @click="activeTab = 'cloud'" :class="{'border-electric-blue text-electric-blue': activeTab === 'cloud', 'border-transparent text-slate-400 hover:text-slate-200': activeTab !== 'cloud'}" class="px-6 py-3 font-medium border-b-2 transition-colors focus:outline-none">Cloud/DevOps</button>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center">
+                        <!-- Backend -->
+                        <template x-if="activeTab === 'backend'">
+                            <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg" class="h-12 mb-2"/>
+                                <span class="font-semibold">Go (Gin)</span>
+                            </div>
+                        </template>
+                        <template x-if="activeTab === 'backend'">
+                            <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain-wordmark.svg" class="h-12 mb-2"/>
+                                <span class="font-semibold">Laravel</span>
+                            </div>
+                        </template>
+                        <!-- Mobile -->
+                        <template x-if="activeTab === 'mobile'">
+                             <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" class="h-12 mb-2"/>
+                                <span class="font-semibold">Flutter</span>
+                            </div>
+                        </template>
+                        <!-- Data -->
+                        <template x-if="activeTab === 'data'">
+                            <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" class="h-12 mb-2"/>
+                                <span class="font-semibold">MySQL</span>
+                            </div>
+                        </template>
+                        <template x-if="activeTab === 'data'">
+                            <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg" class="h-12 mb-2"/>
+                                <span class="font-semibold">PostgreSQL</span>
+                            </div>
+                        </template>
+                        <template x-if="activeTab === 'data'">
+                             <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <svg class="h-12 mb-2" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><path fill="#F05138" d="M106.88 50.31c-1.25-10.62-10-18.75-20.62-18.75-6.25 0-11.88 2.5-15.62 6.88-3.75-4.38-9.38-6.88-15.62-6.88-10.62 0-19.38 8.13-20.62 18.75C16.88 51.56 0 66.25 0 85.31c0 10.63 8.75 19.38 19.38 19.38h89.38C119.38 104.69 128 96 128 85.31c0-19.06-16.88-33.75-38.12-35zM64 88.44l-18.75-19.06L56.25 59l7.5 7.5V40.63h1.25v25.62l7.5-7.5 11.25 10.31L64 88.44z"/></svg>
+                                <span class="font-semibold">Redis</span>
+                            </div>
+                        </template>
+                        <template x-if="activeTab === 'data'">
+                             <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <svg class="h-12 mb-2" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><path fill="#00BFB3" d="M89.38 52.81c-1.88-15.62-15-28.12-30.62-28.12-9.38 0-18.13 3.75-24.38 10-5.63-6.25-14.38-10-24.38-10C-5.62 24.69-5 46.56 10.63 52.81-12.5 54.69-25 73.44-25 96.56c0 15.63 12.5 28.13 28.13 28.13h89.38c15.63 0 28.13-12.5 28.13-28.13-1.25-23.12-25-41.87-56.26-43.75zM64 88.44l-18.75-19.06 11.25-10.31 7.5 7.5V40.63h1.25v25.62l7.5-7.5 11.25 10.31L64 88.44z"/></svg>
+                                <span class="font-semibold">Elasticsearch</span>
+                            </div>
+                        </template>
+                         <!-- Cloud/DevOps -->
+                        <template x-if="activeTab === 'cloud'">
+                             <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" class="h-12 mb-2"/>
+                                <span class="font-semibold">GCP</span>
+                            </div>
+                        </template>
+                        <template x-if="activeTab === 'cloud'">
+                             <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" class="h-12 mb-2"/>
+                                <span class="font-semibold">Firebase</span>
+                            </div>
+                        </template>
+                        <template x-if="activeTab === 'cloud'">
+                             <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" class="h-12 mb-2"/>
+                                <span class="font-semibold">Docker</span>
+                            </div>
+                        </template>
+                        <template x-if="activeTab === 'cloud'">
+                             <div class="flex flex-col items-center p-4 bg-slate-surface/50 rounded-lg">
+                                <svg class="h-12 mb-2" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><path fill="#333" d="M128 0C57.31 0 0 57.31 0 128s57.31 128 128 128 128-57.31 128-128S198.69 0 128 0zm-24.45 42.49c1.6-1.6 3.2-1.6 4.8 0l22.85 22.85c1.6 1.6 1.6 3.2 0 4.8l-22.85 22.85c-1.6 1.6-3.2 1.6-4.8 0l-22.85-22.85c-1.6-1.6-1.6-3.2 0-4.8l22.85-22.85zm48.9 48.9c1.6 1.6 1.6 3.2 0 4.8l-22.85 22.85c-1.6 1.6-3.2 1.6-4.8 0l-22.85-22.85c-1.6-1.6-1.6-3.2 0-4.8l22.85-22.85c1.6-1.6 3.2-1.6 4.8 0l22.85 22.85zM54.65 91.39c1.6-1.6 3.2-1.6 4.8 0l22.85 22.85c1.6 1.6 1.6 3.2 0 4.8l-22.85 22.85c-1.6 1.6-3.2 1.6-4.8 0l-22.85-22.85c-1.6-1.6-1.6-3.2 0-4.8l22.85-22.85zm97.8 48.9c1.6 1.6 1.6 3.2 0 4.8l-22.85 22.85c-1.6 1.6-3.2 1.6-4.8 0l-22.85-22.85c-1.6-1.6-1.6-3.2 0-4.8l22.85-22.85c1.6-1.6 3.2-1.6 4.8 0l22.85 22.85zm-48.9 48.9c1.6 1.6 1.6 3.2 0 4.8l-22.85 22.85c-1.6 1.6-3.2 1.6-4.8 0l-22.85-22.85c-1.6-1.6-1.6-3.2 0-4.8l22.85-22.85c1.6-1.6 3.2-1.6 4.8 0l22.85 22.85z"/></svg>
+                                <span class="font-semibold">n8n</span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                
+                 <!-- Marquee -->
+                <div x-data x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal mt-16 w-full overflow-hidden relative">
+                    <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-base/30 to-transparent z-10"></div>
+                    <div class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-base/30 to-transparent z-10"></div>
+                    <div class="flex animate-marquee whitespace-nowrap">
+                        <span class="mx-4 text-slate-400">Kubernetes</span>
+                        <span class="mx-4 text-slate-400">CI/CD</span>
+                        <span class="mx-4 text-slate-400">Terraform</span>
+                        <span class="mx-4 text-slate-400">Prometheus</span>
+                        <span class="mx-4 text-slate-400">Grafana</span>
+                        <span class="mx-4 text-slate-400">Git</span>
+                        <span class="mx-4 text-slate-400">Linux</span>
+                        <span class="mx-4 text-slate-400">Nginx</span>
+                        <!-- Duplicate for seamless loop -->
+                        <span class="mx-4 text-slate-400">Kubernetes</span>
+                        <span class="mx-4 text-slate-400">CI/CD</span>
+                        <span class="mx-4 text-slate-400">Terraform</span>
+                        <span class="mx-4 text-slate-400">Prometheus</span>
+                        <span class="mx-4 text-slate-400">Grafana</span>
+                        <span class="mx-4 text-slate-400">Git</span>
+                        <span class="mx-4 text-slate-400">Linux</span>
+                        <span class="mx-4 text-slate-400">Nginx</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 sm:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div x-data x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-slate-text dark:text-slate-text mb-4">Proyek Unggulan</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-slate-300 dark:text-slate-300">Beberapa pekerjaan yang saya banggakan.</p>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div x-data x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal flex justify-center space-x-2 md:space-x-4 mb-12">
+                    <button @click="activeFilter = 'all'" :class="{'bg-vivid-violet text-white': activeFilter === 'all', 'bg-slate-surface text-slate-300 hover:bg-slate-surface/70': activeFilter !== 'all'}" class="px-4 py-2 text-sm font-semibold rounded-full transition-colors">Semua</button>
+                    <button @click="activeFilter = 'backend'" :class="{'bg-vivid-violet text-white': activeFilter === 'backend', 'bg-slate-surface text-slate-300 hover:bg-slate-surface/70': activeFilter !== 'backend'}" class="px-4 py-2 text-sm font-semibold rounded-full transition-colors">Backend</button>
+                    <button @click="activeFilter = 'web'" :class="{'bg-vivid-violet text-white': activeFilter === 'web', 'bg-slate-surface text-slate-300 hover:bg-slate-surface/70': activeFilter !== 'web'}" class="px-4 py-2 text-sm font-semibold rounded-full transition-colors">Web</button>
+                    <button @click="activeFilter = 'mobile'" :class="{'bg-vivid-violet text-white': activeFilter === 'mobile', 'bg-slate-surface text-slate-300 hover:bg-slate-surface/70': activeFilter !== 'mobile'}" class="px-4 py-2 text-sm font-semibold rounded-full transition-colors">Mobile</button>
+                </div>
+
+                <!-- Project Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <template x-for="(project, index) in projects" :key="project.id">
+                        <div x-show="activeFilter === 'all' || activeFilter === project.category"
+                             x-data x-intersect.once.margin.-100px="$el.classList.add('visible')"
+                             class="reveal bg-slate-base/50 dark:bg-slate-base/50 backdrop-blur-sm border border-slate-surface rounded-2xl overflow-hidden group transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-vivid-violet/10"
+                             :style="`transition-delay: ${index * 100}ms`"
+                             @click="openModal(project)">
+                            <div class="relative">
+                                <img :src="project.thumb" :alt="project.title" class="w-full h-48 object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-base/80 to-transparent"></div>
+                                <div class="absolute bottom-0 left-0 p-4">
+                                    <h3 class="text-xl font-bold text-slate-text" x-text="project.title"></h3>
+                                    <p class="text-sm text-electric-blue font-semibold" x-text="project.role"></p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-slate-300 dark:text-slate-300 text-sm mb-4" x-text="project.impact"></p>
+                                <div class="flex flex-wrap gap-2">
+                                    <template x-for="tech in project.tech" :key="tech">
+                                        <span class="px-2 py-1 text-xs font-semibold text-neon-green bg-neon-green/10 rounded-full" x-text="tech"></span>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 sm:py-32 bg-slate-base/30 dark:bg-slate-base/30">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div x-data x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-slate-text dark:text-slate-text mb-4">Apa Kata Mereka</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-slate-300 dark:text-slate-300">Testimoni dari rekan kerja dan klien.</p>
+                </div>
+                <div x-data="{
+                        testimonials: [
+                            { quote: 'Kelvin adalah problem solver sejati. Kemampuannya dalam merancang arsitektur backend yang scalable sangat mengesankan dan berdampak besar pada stabilitas produk kami.', name: 'Andi Wijaya', role: 'CTO, Tech Startup', avatar: 'https://i.pravatar.cc/100?u=andi' },
+                            { quote: 'Bekerja dengan Kelvin dalam proyek mobile sangat menyenangkan. Dia sangat memperhatikan detail dan selalu memberikan hasil yang melebihi ekspektasi.', name: 'Citra Lestari', role: 'Product Manager, FinTech Co.', avatar: 'https://i.pravatar.cc/100?u=citra' },
+                            { quote: 'Automasi yang dibangun oleh Kelvin menghemat waktu tim kami secara signifikan. Solusinya cerdas, efisien, dan mudah dipelihara.', name: 'Budi Santoso', role: 'Head of Operations, E-commerce', avatar: 'https://i.pravatar.cc/100?u=budi' }
+                        ],
+                        activeIndex: 0,
+                        autoplay() {
+                            setInterval(() => {
+                                this.activeIndex = (this.activeIndex + 1) % this.testimonials.length;
+                            }, 5000);
+                        }
+                    }" x-init="autoplay()" x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal relative max-w-3xl mx-auto h-80">
+                    <template x-for="(testimonial, index) in testimonials" :key="index">
+                        <div x-show="activeIndex === index" x-transition:enter="transition ease-in-out duration-500" x-transition:enter-start="opacity-0 transform translate-x-8" x-transition:enter-end="opacity-100 transform translate-x-0" x-transition:leave="transition ease-in-out duration-500" x-transition:leave-start="opacity-100 transform translate-x-0" x-transition:leave-end="opacity-0 transform -translate-x-8" class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                            <blockquote class="text-xl italic text-slate-200 dark:text-slate-200 mb-6">
+                                "&ldquo;"<span x-text="testimonial.quote"></span>"&rdquo;"
+                            </blockquote>
+                            <div class="flex items-center">
+                                <img :src="testimonial.avatar" class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <p class="font-bold text-slate-text" x-text="testimonial.name"></p>
+                                    <p class="text-sm text-slate-400" x-text="testimonial.role"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <!-- Dots -->
+                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 flex space-x-3">
+                        <template x-for="(t, index) in testimonials" :key="index">
+                            <button @click="activeIndex = index" :class="{'bg-electric-blue': activeIndex === index, 'bg-slate-surface': activeIndex !== index}" class="w-3 h-3 rounded-full transition-colors"></button>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 sm:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div x-data x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-slate-text dark:text-slate-text mb-4">Hubungi Saya</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-slate-300 dark:text-slate-300">Punya proyek menarik atau sekadar ingin menyapa? Silakan tinggalkan pesan.</p>
+                </div>
+
+                <div x-data x-intersect.once.margin.-100px="$el.classList.add('visible')" class="reveal max-w-2xl mx-auto bg-slate-base/50 dark:bg-slate-base/50 backdrop-blur-sm border border-slate-surface rounded-2xl p-8">
+                    <form action="mailto:your.email@example.com" method="get" enctype="text/plain">
+                        <div class="grid grid-cols-1 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-slate-300">Nama</label>
+                                <input type="text" name="name" id="name" required class="mt-1 block w-full bg-slate-surface/50 border-slate-surface rounded-md shadow-sm py-2 px-3 text-slate-text focus:outline-none focus:ring-neon-green focus:border-neon-green">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-slate-300">Email</label>
+                                <input type="email" name="email" id="email" required class="mt-1 block w-full bg-slate-surface/50 border-slate-surface rounded-md shadow-sm py-2 px-3 text-slate-text focus:outline-none focus:ring-neon-green focus:border-neon-green">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-slate-300">Pesan</label>
+                                <textarea id="message" name="body" rows="4" required class="mt-1 block w-full bg-slate-surface/50 border-slate-surface rounded-md shadow-sm py-2 px-3 text-slate-text focus:outline-none focus:ring-neon-green focus:border-neon-green"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full px-8 py-3 text-lg font-bold text-slate-base bg-neon-green rounded-lg shadow-lg shadow-neon-green/20 hover:scale-[1.02] hover:shadow-neon-green/40 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-neon-green/50">
+                                    Kirim Pesan
+                                </button>
+                                <p class="text-center text-xs text-slate-400 mt-4">Biasanya saya merespons dalam 1-2 hari kerja.</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-base/50 dark:bg-slate-base/50 border-t border-slate-surface">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+                <div class="text-center md:text-left">
+                    <p class="text-sm text-slate-400">&copy; 2024 Kelvin Hartanto. All Rights Reserved.</p>
+                    <p class="text-xs text-slate-500 mt-1">Dibangun dengan <span class="text-electric-blue">Tailwind CSS</span> & <span class="text-vivid-violet">Alpine.js</span></p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-400 hover:text-electric-blue transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12.013c0 4.418 2.865 8.166 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.852 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.013C22 6.477 17.523 2 12 2z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-electric-blue transition-colors">
+                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                     <a href="#" class="text-slate-400 hover:text-electric-blue transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616v.064c0 2.298 1.634 4.212 3.793 4.649-.65.177-1.354.23-2.06.088.616 1.924 2.413 3.282 4.545 3.321-1.68 1.31-3.83 2.093-6.16 2.093-.404 0-.8-.023-1.195-.07 2.17 1.394 4.768 2.212 7.548 2.212 9.058 0 14.01-7.503 14.01-14.013 0-.213-.005-.426-.014-.637.96-.695 1.798-1.562 2.457-2.548z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Detail Modal -->
+    <div x-show="isModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display: none;">
+        <!-- Overlay -->
+        <div @click="isModalOpen = false" class="absolute inset-0 bg-slate-base/80 backdrop-blur-sm"></div>
+        <!-- Modal Content -->
+        <div x-show="isModalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="relative bg-slate-surface w-full max-w-3xl max-h-[90vh] rounded-2xl shadow-2xl shadow-vivid-violet/20 border border-slate-surface/50 overflow-y-auto">
+            <div class="p-6 md:p-8">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-2xl md:text-3xl font-bold font-display text-slate-text" x-text="modalData.title"></h3>
+                    <button @click="isModalOpen = false" class="p-2 -mr-2 -mt-2 text-slate-400 hover:text-white hover:bg-slate-base rounded-full transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <p class="text-sm font-semibold text-electric-blue mt-1 mb-4" x-text="modalData.role"></p>
+                <img :src="modalData.thumb" :alt="modalData.title" class="w-full h-64 object-cover rounded-lg mb-6">
+                
+                <h4 class="text-lg font-semibold text-slate-text mb-2">Deskripsi Proyek</h4>
+                <p class="text-slate-300 mb-6" x-text="modalData.desc"></p>
+
+                <h4 class="text-lg font-semibold text-slate-text mb-2">Dampak & Hasil</h4>
+                <p class="text-slate-300 mb-6" x-text="modalData.impact"></p>
+
+                <h4 class="text-lg font-semibold text-slate-text mb-2">Teknologi yang Digunakan</h4>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <template x-for="tech in modalData.tech" :key="tech">
+                        <span class="px-3 py-1 text-sm font-semibold text-neon-green bg-neon-green/10 rounded-full" x-text="tech"></span>
+                    </template>
+                </div>
+
+                <div class="flex space-x-4 mt-8 border-t border-slate-surface/50 pt-6">
+                    <a :href="modalData.live" target="_blank" class="flex-1 text-center px-6 py-3 font-bold text-slate-base bg-neon-green rounded-lg shadow-lg shadow-neon-green/20 hover:scale-[1.03] transition-transform duration-300">
+                        Live Demo
+                    </a>
+                    <a :href="modalData.repo" target="_blank" class="flex-1 text-center px-6 py-3 font-bold text-slate-text rounded-lg ring-2 ring-vivid-violet hover:bg-vivid-violet transition-colors duration-300">
+                        Source Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
